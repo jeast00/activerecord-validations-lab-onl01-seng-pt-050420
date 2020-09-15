@@ -4,6 +4,8 @@ class Post < ActiveRecord::Base
   validates :summary, length: { maximum: 250 }
   validates :category, inclusion: { in: %w(Fiction Non-Fiction) }
   validates :is_clickbaity?
+  
+  
   CUSTOM_VALIDATION = [
       /Won't Believe/i,
       /Secret/i,
@@ -12,7 +14,9 @@ class Post < ActiveRecord::Base
     ]
     
   def is_clickbaity?
-    
+    if CUSTOM_VALIDATION.none? { |valid| valid.match title }
+      errors.add(:title, "must be clickbait")
+    end
   end
     
 end
