@@ -1,3 +1,3 @@
 class Post < ActiveRecord::Base
-  validates :post, presence: true
+  validates :title, presence: true
 end
